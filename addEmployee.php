@@ -195,8 +195,8 @@ if(!isset($_SESSION['userName'])){
                                     <span id="errpermanent_address"></span><br>
                                     <input class="form-control" type="text" name="employ_nid" id="employ_nid" placeholder="Pasport/NID" onkeyup="change(this.id,'erremploy_nid')" onblur="change(this.id,'erremploy_nid')" >
                                     <span id="erremploy_nid"></span><br>
-                                    <input class="form-control" type="text" name="employment_status" id="employment_status" placeholder="Employment Status" onkeyup="change(this.id,'erremployment_status')" onblur="change(this.id,'erremployment_status')" >
-                                    <span id="erremployment_status"></span><br>
+                                    <input class="form-control" type="text" name="employee_status" id="employee_status" placeholder="Employee Status" onkeyup="change(this.id,'erremployee_status')" onblur="change(this.id,'erremployee_status')" >
+                                    <span id="erremployee_status"></span><br>
                                 </div>
 
 
@@ -319,8 +319,8 @@ if(!isset($_SESSION['userName'])){
                                     ?>
                                     <input class="form-control" type="hidden" name="employee_code" id="" placeholder="Employee Code" value="<?php echo $result?>">
                                     <input class="form-control" type="text" name="" id="" placeholder="Employee Code" value="<?php echo $result?>" disabled><br>
-                                    <input class="form-control" type="text" name="employee_status" id="employee_status" placeholder="Employee Status" onkeyup="change(this.id,'erremployee_status')" onblur="change(this.id,'erremployee_status')" >
-                                    <span id="erremployee_status"></span><br>
+                                    <input class="form-control" type="text" name="created_by" id="created_by" value="<?php echo $_SESSION['full_name']?>" disabled >
+                                    <span id="errcreated_by"></span><br>
 
                                 </div>
                                 <div class="modal-footer">
@@ -351,7 +351,7 @@ if(!isset($_SESSION['userName'])){
         var Present_address= $("#present_address").val();
         var Permanent_address= $("#permanent_address").val();
         var Employ_nid= $("#employ_nid").val();
-        var Employment_status= $("#employment_status").val();
+        var employee_status= $("#employee_status").val();
         var Email= $(".email").val();
         var Employeepass= $("#employeepass").val();
         var Employment_id= $("#employment_id").val();
@@ -359,7 +359,7 @@ if(!isset($_SESSION['userName'])){
         var Designation= $("#designation").val();
         var Appointment_date= $("#appointment_date").val();
         var Joining_date= $("#joining_date").val();
-        var Employee_status= $("#employee_status").val();
+        var created_by= $("#created_by").val();
         
         
         if(Employ_name==""){
@@ -499,15 +499,15 @@ if(!isset($_SESSION['userName'])){
            $("#employ_nid").attr("style","border:");
            $("#erremploy_nid").html("");
        }
-      if(Employment_status==""){
-            $("#employment_status").attr("style","border: 3px solid red");
-            $("#erremployment_status").css("color","red");
-            $("#erremployment_status").html("Please select your employee status");
+      if(employee_status==""){
+            $("#employee_status").attr("style","border: 3px solid red");
+            $("#erremployee_status").css("color","red");
+            $("#erremployee_status").html("Please select your employee status");
             return false;
         }
         else{
-            $("#employment_status").attr("style","border:");
-            $("#erremployment_status").html("");
+            $("#employee_status").attr("style","border:");
+            $("#erremployee_status").html("");
         }
       if(Email==""){
             $(".email").attr("style","border: 3px solid red");
@@ -578,14 +578,14 @@ if(!isset($_SESSION['userName'])){
             $("#joining_date").attr("style","border:");
             $("#errjoining_date").html("");
         }
-        if(Employee_status==""){
-            $("#employee_status").attr("style","border: 3px solid red");
-            $("#erremployee_status").css("color","red");
-            $("#erremployee_status").html("Please select your employee status");
+        if(created_by==""){
+            $("#created_by").attr("style","border: 3px solid red");
+            $("#errcreated_by").css("color","red");
+            $("#errcreated_by").html("Please select your employee status");
             return false;
         }else{
-            $("#employee_status").attr("style","border:");
-            $("#erremployee_status").html("");
+            $("#created_by").attr("style","border:");
+            $("#errcreated_by").html("");
         }
        
     });
@@ -666,7 +666,7 @@ if(!isset($_SESSION['userName'])){
     $preaddress=$_POST['present_address'];
     $peraddress=$_POST['permanent_address'];
     $passNid=$_POST['employ_nid'];
-    $status=$_POST['employment_status'];
+    $status=$_POST['employee_status'];
 //    $Empemail=$_POST['employeeemail'];
     $Emppass=$_POST['employeepass'];
     $EmptypeId=$_POST['employment_id'];
@@ -675,7 +675,8 @@ if(!isset($_SESSION['userName'])){
     $appointdate=$_POST['appointment_date'];
     $joindate=$_POST['joining_date'];
     $Empcode=$_POST['employee_code'];
-    $Empstatus=$_POST['employee_status'];
+    $created_by=$_POST['created_by'];
+    //$Empstatus=$_POST['employement_status'];
         $dir='uploads/';
     $path=$dir.basename($_FILES['employmet_picture']['name']);
     $temp=$_FILES['employmet_picture']['tmp_name'];
@@ -689,7 +690,8 @@ if(!isset($_SESSION['userName'])){
     $result = mysqli_query($conn, $s);
     $num = mysqli_num_rows($result);
     if ($num == 0) {
-        $sqls = "INSERT INTO `user_table` ( `user_name`, `full_name`, `email`, `phone`, `password`, `role_id`, `account_creation_date`, `status`, `otp_code`) VALUES ('$fullname', '$fullname', '$email', '$phone', '$Emppass', '4', '$today', '$Empstatus','')";
+        
+        $sqls = "INSERT INTO `user_table` ( `user_name`, `full_name`, `email`, `phone`, `password`, `role_id`, `account_creation_date`, `status`, `created_by`) VALUES ('$fullname', '$fullname', '$email', '$phone', '$Emppass', '4', '$today', '$status','$created_by')";
         $query = mysqli_query($conn, $sqls);
         if ($query) {
             // as a employee insert
@@ -699,7 +701,7 @@ if(!isset($_SESSION['userName'])){
             if ($nums == 1) {
                 echo "Employee  Already Exits";
             } else {
-                $sql = "INSERT INTO employee (employee_type_id,department_id,designation_id,employee_name, appointment_date, date_of_birth, employee_code, email, joining_date, employee_status, religion, nationality, district, Countries, postal_code, Passport_or_NID, gender, maritial_Status, present_address, permanent_address, picture, phone, employement_status) VALUES ( '$EmptypeId', '$deptId','$designationId', '$fullname', '$appointdate', '$DOB', '$Empcode', '$email', '$joindate', '$status', '$religion', '$nationality', '$distic', '$country', '$postCode', '$passNid', '$gender', '$marital_status', '$preaddress', '$peraddress', '$path', '$phone', '$Empstatus');";
+                $sql = "INSERT INTO employee (employee_type_id,department_id,designation_id,employee_name, appointment_date, date_of_birth, employee_code, email, joining_date, employee_status, religion, nationality, district, Countries, postal_code, Passport_or_NID, gender, maritial_Status, present_address, permanent_address, picture, phone, created_by) VALUES ( '$EmptypeId', '$deptId','$designationId', '$fullname', '$appointdate', '$DOB', '$Empcode', '$email', '$joindate', '$status', '$religion', '$nationality', '$distic', '$country', '$postCode', '$passNid', '$gender', '$marital_status', '$preaddress', '$peraddress', '$path', '$phone', '$created_by');";
                 $query = mysqli_query($conn, $sql);
                 echo "<script>alert('Employee Added')</script>";
             }

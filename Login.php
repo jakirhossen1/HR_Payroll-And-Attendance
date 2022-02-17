@@ -171,6 +171,9 @@ margin-left: 4px;
         	
             $_SESSION['userName']=$emails;
             $_SESSION['role_id']= $user['role_id'];
+            $_SESSION['full_name']= $user['full_name'];
+
+
             //require_once('PHPMailer/PHPMailer.php');
             //require_once('PHPMailer/SMTP.php');
 
