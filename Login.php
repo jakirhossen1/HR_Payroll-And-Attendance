@@ -165,12 +165,12 @@ margin-left: 4px;
         
         $sql="Select * from user_table where email='$emails' && password='$pass'";
         $query=mysqli_query($conn,$sql);
-        
+        $user = mysqli_fetch_array($query);
         $num=mysqli_num_rows($query);
         if($num==1){
         	
-             $_SESSION['userName']=$emails;
-
+            $_SESSION['userName']=$emails;
+            $_SESSION['role_id']= $user['role_id'];
             //require_once('PHPMailer/PHPMailer.php');
             //require_once('PHPMailer/SMTP.php');
 
