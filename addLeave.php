@@ -81,29 +81,7 @@ if(!isset($_SESSION['userName'])){
               <div class="col-md-3"></div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <?php
-
-                  $sql = "SELECT employee_name FROM employee";
-                  $query = mysqli_query($conn, $sql);
-                  $rowcount = mysqli_num_rows($query);
-                  ?>
-                  <select class="form-select" name="select_employee" id="select_employee" onkeyup="change(this.id,'errselect_employee')" onblur="change(this.id,'errselect_employee')" >
-                      
-
-                    <option value="">Select Employee</option>
-
-                    <?php
-                    for ($i = 1; $i <= $rowcount; $i++) {
-                      $row = mysqli_fetch_array($query);
-                    ?>
-                      <option value="<?php echo $row['employee_name']; ?>"><?php echo $row['employee_name']; ?></option>
-                    <?php
-                    }
-
-                    ?>
-
-                  </select>
-                    <span id="errselect_employee"></span><br>
+                  <input type="" name="" class="form-control mt-3 mb-3" value="<?php echo $_SESSION['full_name']?>" disabled>
 
                 </div>
                 <div class="form-group">
@@ -180,7 +158,7 @@ if(!isset($_SESSION['userName'])){
                     <span id="errleave_status"></span>
                 </div>
                 <div class="form-group">
-                  <input class="btn btn-primary bx-pull-right mt-3" type="submit" name="submit" value="save">
+                  <input class="btn btn-primary bx-pull-right mt-3" type="submit" name="submit" value="Apply">
                 </div>
               </div>
               <div class="col-md-3"></div>

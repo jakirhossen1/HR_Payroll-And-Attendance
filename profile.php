@@ -105,7 +105,26 @@ session_start();
                                 <p class="mb-0 text-secondary"><?php echo $row['district'].",".$row['Countries'];?></p>
                                 <div class="mt-4"></div>
                                 <h6 class="mb-1"><?php echo $row['department_id']."--".$row['designation_id'];?> </h6>
-                                <p class="mb-0 text-secondary">University of Information Technology</p>
+                                <p class="mb-0 text-secondary">
+                                    <h3>
+                                        <?php 
+                                        if($_SESSION['role_id'] == 1)
+                                            { 
+                                                echo "Super Admin";
+                                            }
+                                        elseif($_SESSION['role_id'] == 2){ echo "Admin";}
+                                        elseif($_SESSION['role_id'] == 3)
+                                            { 
+                                                echo "HR";
+                                            }
+                                        elseif($_SESSION['role_id'] == 4)
+                                            { 
+                                                echo "Employee";
+                                            }
+                                        ?>
+                                    </h3>
+                                    
+                                </p>
                             </div>
                             <?php }?>
                             <hr>
