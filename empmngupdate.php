@@ -121,7 +121,7 @@
                   <input class="form-control" type="text" name="permanent_address" value="<?php echo $num['permanent_address'];?>" ><br>
                   <input class="form-control" type="text" name="employ_nid" value="<?php echo $num['Passport_or_NID'];?>"><br>
                   <select class="form-control" name="employment_status" value="" >
-                      <option value="<?php echo $num['employement_status'];?>"><?php echo $num['employement_status'];?></option>
+                      <option value="<?php echo $num['employee_status'];?>"><?php echo $num['employee_status'];?></option>
                       <option value="Active">Active</option>
                       <option value="Inactive">Inactive</option>
                   </select>
@@ -227,7 +227,7 @@
                   <label class="form-control" for="">Appointment Date: <input class="form-control" type="date"name="appointment_date" value="<?php echo $num['appointment_date'];?>"></label><br>
                   <label class="form-control" for="">Joining Date: <input class="form-control" type="date"name="joining_date" value="<?php echo $num['joining_date'];?>" ></label><br>
                   <input class="form-control" type="text" name="employee_code" value="<?php echo $num['employee_code'];?>"><br>
-                  <input class="form-control" type="text" name="employee_status" value="<?php echo $num['employee_status'];?>"><br>
+                  <input class="form-control" type="text" name="created_by" value="<?php echo $num['created_by'];?>"><br>
 
                 </div>
                 <div class="modal-footer">

@@ -73,7 +73,7 @@ if(!isset($_SESSION['userName'])){
           <form action="" method="post" enctype="multipart/form-data" id="myform">
             <div class="row">
               <div class="col-md-12">
-                <h3 style="margin:10px;">Add Leave</h3>
+                <h3 style="margin:10px;">Apply Leave</h3>
               </div>
             </div>
             <hr>

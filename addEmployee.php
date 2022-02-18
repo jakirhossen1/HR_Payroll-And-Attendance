@@ -318,9 +318,10 @@ if(!isset($_SESSION['userName'])){
                                     
                                     ?>
                                     <input class="form-control" type="hidden" name="employee_code" id="" placeholder="Employee Code" value="<?php echo $result?>">
+                                    <label>Employee Id:</label>
                                     <input class="form-control" type="text" name="" id="" placeholder="Employee Code" value="<?php echo $result?>" disabled><br>
-                                    <input class="form-control" type="text" name="created_by" id="created_by" value="<?php echo $_SESSION['full_name']?>" disabled >
-                                    <span id="errcreated_by"></span><br>
+                                    <label>Created By:</label>
+                                    <input class="form-control" type="text" name="created_by" id="created_by" value="<?php echo $_SESSION['full_name']?>" disabled ><br>
 
                                 </div>
                                 <div class="modal-footer">
@@ -359,7 +360,7 @@ if(!isset($_SESSION['userName'])){
         var Designation= $("#designation").val();
         var Appointment_date= $("#appointment_date").val();
         var Joining_date= $("#joining_date").val();
-        var created_by= $("#created_by").val();
+        //var created_by= $("#created_by").val();
         
         
         if(Employ_name==""){
@@ -578,15 +579,15 @@ if(!isset($_SESSION['userName'])){
             $("#joining_date").attr("style","border:");
             $("#errjoining_date").html("");
         }
-        if(created_by==""){
-            $("#created_by").attr("style","border: 3px solid red");
-            $("#errcreated_by").css("color","red");
-            $("#errcreated_by").html("Please select your employee status");
-            return false;
-        }else{
-            $("#created_by").attr("style","border:");
-            $("#errcreated_by").html("");
-        }
+        // if(created_by==""){
+        //     $("#created_by").attr("style","border: 3px solid red");
+        //     $("#errcreated_by").css("color","red");
+        //     $("#errcreated_by").html("Please select your employee status");
+        //     return false;
+        // }else{
+        //     $("#created_by").attr("style","border:");
+        //     $("#errcreated_by").html("");
+        // }
        
     });
     
@@ -675,7 +676,7 @@ if(!isset($_SESSION['userName'])){
     $appointdate=$_POST['appointment_date'];
     $joindate=$_POST['joining_date'];
     $Empcode=$_POST['employee_code'];
-    $created_by=$_POST['created_by'];
+    $Created_by=$_POST['created_by'];
     //$Empstatus=$_POST['employement_status'];
         $dir='uploads/';
     $path=$dir.basename($_FILES['employmet_picture']['name']);
@@ -691,7 +692,7 @@ if(!isset($_SESSION['userName'])){
     $num = mysqli_num_rows($result);
     if ($num == 0) {
         
-        $sqls = "INSERT INTO `user_table` ( `user_name`, `full_name`, `email`, `phone`, `password`, `role_id`, `account_creation_date`, `status`, `created_by`) VALUES ('$fullname', '$fullname', '$email', '$phone', '$Emppass', '4', '$today', '$status','$created_by')";
+        $sqls = "INSERT INTO `user_table` ( `user_name`, `full_name`, `email`, `phone`, `password`, `role_id`, `account_creation_date`, `status`, `created_by`) VALUES ('$fullname', '$fullname', '$email', '$phone', '$Emppass', '4', '$today', '$status','$Created_by')";
         $query = mysqli_query($conn, $sqls);
         if ($query) {
             // as a employee insert
@@ -701,7 +702,7 @@ if(!isset($_SESSION['userName'])){
             if ($nums == 1) {
                 echo "Employee  Already Exits";
             } else {
-                $sql = "INSERT INTO employee (employee_type_id,department_id,designation_id,employee_name, appointment_date, date_of_birth, employee_code, email, joining_date, employee_status, religion, nationality, district, Countries, postal_code, Passport_or_NID, gender, maritial_Status, present_address, permanent_address, picture, phone, created_by) VALUES ( '$EmptypeId', '$deptId','$designationId', '$fullname', '$appointdate', '$DOB', '$Empcode', '$email', '$joindate', '$status', '$religion', '$nationality', '$distic', '$country', '$postCode', '$passNid', '$gender', '$marital_status', '$preaddress', '$peraddress', '$path', '$phone', '$created_by');";
+                $sql = "INSERT INTO employee (employee_type_id,department_id,designation_id,employee_name, appointment_date, date_of_birth, employee_code, email, joining_date, employee_status, religion, nationality, district, Countries, postal_code, Passport_or_NID, gender, maritial_Status, present_address, permanent_address, picture, phone, created_by) VALUES ( '$EmptypeId', '$deptId','$designationId', '$fullname', '$appointdate', '$DOB', '$Empcode', '$email', '$joindate', '$status', '$religion', '$nationality', '$distic', '$country', '$postCode', '$passNid', '$gender', '$marital_status', '$preaddress', '$peraddress', '$path', '$phone', '$Created_by');";
                 $query = mysqli_query($conn, $sql);
                 echo "<script>alert('Employee Added')</script>";
             }

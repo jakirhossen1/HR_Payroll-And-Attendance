@@ -227,7 +227,7 @@ session_start();
                     <div class="col-md-4">
                         <div class="profile-work well well-transparent">
                             <h6 class="">Bio</h6>
-                            <p>Hello I'm Saidur Rahman.I love Programming.</p>
+                            <p>Hello, I'm <?php echo $row['employee_name'];?>. I love Programming.</p>
                                                      
                         </div>
                     </div>
