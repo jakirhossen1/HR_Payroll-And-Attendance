@@ -8,7 +8,7 @@ if(!isset($_SESSION['userName'])){
 if(isset($_POST['submit'])){
     
     $leaveType=$_POST['leavetype'];
-    $paymentstatus="pending";
+    
     
     $sel="SELECT * FROM leave_type WHERE leave_type='$leaveType'";
     $qurey=mysqli_query($conn,$sel);
@@ -16,7 +16,7 @@ if(isset($_POST['submit'])){
     if($num==1){
         echo "Leave Type Already Exits";
     }else{
-        $sql="INSERT INTO leave_type(leave_type , payment_status) Values('$leaveType','$paymentstatus')";
+        $sql="INSERT INTO leave_type(leave_type) Values('$leaveType')";
         $qureyss=mysqli_query($conn,$sql);
         echo "Leave type Added"; 
         header("location:leaveTypeManage.php");

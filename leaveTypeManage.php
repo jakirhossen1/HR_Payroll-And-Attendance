@@ -91,7 +91,7 @@
                       <td><?php echo $n++ ?></td>
                       <td><?php echo $row[1] ?></td>
                       <td>
-                        <a class="btn btn-danger" href="leavemanagedelete.php?aid=<?php echo $row[0]?>">Delete</a>
+                        <a class="btn btn-danger" href="manageleavedelete.php?aid=<?php echo $row[0]?>">Delete</a>
                         <a class="btn btn-success" href="addleavetypeupdate.php?aid=<?php echo $row[0]?>">Update</a>
                       </td>
                     </tr>
