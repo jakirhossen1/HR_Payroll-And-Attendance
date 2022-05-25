@@ -1,9 +1,15 @@
-<?php require "connect.php";
-date_default_timezone_set("Asia/Dhaka");
-session_start();
-if(!isset($_SESSION['userName'])){
-  header("location:Login.php");  
-}
+<?php 
+
+  require "connect.php";
+
+  date_default_timezone_set("Asia/Dhaka");
+
+  session_start();
+  if(!isset($_SESSION['userName'])){
+
+    header("location:Login.php");  
+
+  }
 
 ?>
 
@@ -12,16 +18,19 @@ if(!isset($_SESSION['userName'])){
 <html lang="en" class="light-theme">
 
 <head>
+
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+
   <!--plugins-->
   <link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
   <link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
   <link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
   <link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
   <link href="assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
   <!-- Bootstrap CSS -->
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="assets/css/bootstrap-extended.css" rel="stylesheet" />
@@ -40,11 +49,17 @@ if(!isset($_SESSION['userName'])){
   <link href="assets/css/header-colors.css" rel="stylesheet" />
 
   <title>HR PAYROLL SOFTWARE</title>
+
   <style>
+
     .forms-body {
+
       margin: 10px;
+
     }
+
   </style>
+
 </head>
 
 <body>
@@ -52,257 +67,352 @@ if(!isset($_SESSION['userName'])){
 
   <!--start wrapper-->
   <div class="wrapper">
+
     <!--start top header-->
     <header class="top-header">
+
       <?php require "headers.php" ?>
+
     </header>
     <!--end top header-->
 
     <!--start sidebar -->
     <aside class="sidebar-wrapper" data-simplebar="true">
+
       <?php require "SidebarMenu.php" ?>
+
     </aside>
     <!--end sidebar -->
 
     <!--start content-->
     <main class="page-content">
 
-      <!--           Enter Your Code here-->
       <div class="modal-content">
+
         <div class="forms-body">
+
           <form action="" method="post" enctype="multipart/form-data" id="myform">
+
             <div class="row">
+
               <div class="col-md-12">
+
                 <h3 style="margin:10px;">Apply Leave</h3>
+
               </div>
+
             </div>
             <hr>
+
             <div class="row">
+
               <div class="col-md-3"></div>
+
               <div class="col-md-6">
+
                 <div class="form-group">
+
                   <input type="" name="" class="form-control mt-3 mb-3" value="<?php echo $_SESSION['full_name']?>" disabled>
 
                 </div>
+
                 <div class="form-group">
+
                   <?php
 
-                  $sql = "SELECT leave_type FROM leave_type";
-                  $query = mysqli_query($conn, $sql);
-                  $rowcount = mysqli_num_rows($query);
+                    $sql = "SELECT leave_type FROM leave_type";
+                    $query = mysqli_query($conn, $sql);
+                    $rowcount = mysqli_num_rows($query);
+
                   ?>
+
                   <select class="form-select" name="leave_type" id="leave_type" onkeyup="change(this.id,'errleave_type')" onblur="change(this.id,'errleave_type')" >
                        
 
                     <option value="">Select Leave Type</option>
 
                     <?php
-                    for ($i = 1; $i <= $rowcount; $i++) {
-                      $row = mysqli_fetch_array($query);
+
+                      for ($i = 1; $i <= $rowcount; $i++) {
+
+                        $row = mysqli_fetch_array($query);
+
                     ?>
                       <option value="<?php echo $row['leave_type']; ?>"><?php echo $row['leave_type']; ?></option>
+
                     <?php
-                    }
+
+                      }
 
                     ?>
 
                   </select>
-                    <span id="errleave_type"></span>
+                  <span id="errleave_type"></span>
+
                 </div>
 
                 <div class="form-group">
+
                   Leave Start Date
                   <input class="form-control mt-1 mb-1 " name="leave_start_date" id="leave_start_date" type="date" onkeyup="change(this.id,'errleave_start_date')" onblur="change(this.id,'errleave_start_date')" >
                    <span id="errleave_start_date"></span>
+
                 </div>
+
                 <div class="form-group">
+
                   Leave Ends Date
                   <input class="form-control mt-1  " name="leave_ends_date" id="leave_ends_date" type="date" onkeyup="change(this.id,'errleave_ends_date')" onblur="change(this.id,'errleave_ends_date')" >
                    <span id="errleave_ends_date"></span>
                 </div>
+
                 <div class="form-group">
+
                   <textarea class="form-control mt-3" name="description" id="description" cols="10" rows="2" placeholder="Please enter your message" onkeyup="change(this.id,'errdescription')" onblur="change(this.id,'errdescription')" ></textarea><br>
                    <span id="errdescription"></span>
+
                 </div>
+
                 <div class="form-group">
+
                   <?php
 
-                  $sql = "SELECT document_Name FROM employee_document";
-                  $query = mysqli_query($conn, $sql);
-                  $rowcount = mysqli_num_rows($query);
-                  ?>
-                  <select class="form-select" name="support_document" id="support_document" onkeyup="change(this.id,'errsupport_document')" onblur="change(this.id,'errsupport_document')" >
-                       
+                    $sql = "SELECT document_Name FROM employee_document";
+                    $query = mysqli_query($conn, $sql);
+                    $rowcount = mysqli_num_rows($query);
 
+                  ?>
+
+                  <select class="form-select" name="support_document" id="support_document" onkeyup="change(this.id,'errsupport_document')" onblur="change(this.id,'errsupport_document')" >
                     <option value="">Select Support Document</option>
 
                     <?php
-                    for ($i = 1; $i <= $rowcount; $i++) {
-                      $row = mysqli_fetch_array($query);
+
+                      for ($i = 1; $i <= $rowcount; $i++) {
+
+                        $row = mysqli_fetch_array($query);
+
                     ?>
                       <option value="<?php echo $row['document_Name']; ?>"><?php echo $row['document_Name']; ?></option>
+                    
                     <?php
-                    }
+
+                      }
 
                     ?>
                   </select>
-                    <span id="errsupport_document"></span>
+                  <span id="errsupport_document"></span>
+
                 </div>
+
                 <div class="form-group">
+
                   <select class="form-select mt-3" name="leave_status" id="leave_status" onkeyup="change(this.id,'errleave_status')" onblur="change(this.id,'errleave_status')" >
                        
                     <option value="">Select Status</option>
                     <option value="pending">Pending</option>
                     <option value="aproved">Aproved</option>
                   </select>
-                    <span id="errleave_status"></span>
+                  <span id="errleave_status"></span>
+
                 </div>
+
                 <div class="form-group">
+
                   <input class="btn btn-primary bx-pull-right mt-3" type="submit" name="submit" value="Apply">
+
                 </div>
+
               </div>
+
               <div class="col-md-3"></div>
+
             </div>
+
           </form>
+
         </div>
+
       </div>
 
 
- <script type="text/JavaScript">
-   $("#myform").submit(function(){
-        var Select_employee= $("#select_employee").val();
-        var Leave_type= $("#leave_type").val();
-        var Leave_start_date= $("#leave_start_date").val();
-        var Leave_ends_date= $("#leave_ends_date").val();
-        var Description= $("#description").val();
-        var Support_document= $("#support_document").val();
-        var Leave_status= $("#leave_status").val();
-        
-      if(Select_employee==""){
+      <script type="text/JavaScript">
+
+        $("#myform").submit(function(){
+
+          var Select_employee= $("#select_employee").val();
+          var Leave_type= $("#leave_type").val();
+          var Leave_start_date= $("#leave_start_date").val();
+          var Leave_ends_date= $("#leave_ends_date").val();
+          var Description= $("#description").val();
+          var Support_document= $("#support_document").val();
+          var Leave_status= $("#leave_status").val();
+              
+
+          if(Select_employee==""){
+
             $("#select_employee").attr("style","border: 3px solid red");
             $("#errselect_employee").css("color","red");
             $("#errselect_employee").html("Please select employee name");
             return false;
-        }else{
+
+          }else{
+
             $("#select_employee").attr("style","border:");
             $("#errselect_employee").html("");
-        }
-      if(Leave_type==""){
+
+          }
+
+
+          if(Leave_type==""){
+
             $("#leave_type").attr("style","border: 3px solid red");
             $("#errleave_type").css("color","red");
             $("#errleave_type").html("Please select your leave type");
             return false;
-        }else{
+
+          }else{
+
             $("#leave_type").attr("style","border:");
             $("#errleave_type").html("");
-        }
-      if(Leave_start_date==""){
+
+          }
+
+
+          if(Leave_start_date==""){
+
             $("#leave_start_date").attr("style","border: 3px solid red");
             $("#errleave_start_date").css("color","red");
             $("#errleave_start_date").html("Please select leave start date");
             return false;
-        }
-       else{
+
+          }else{
+
            $("#leave_start_date").attr("style","border:");
            $("#errleave_start_date").html("");
-       }
-      if(Leave_ends_date==""){
+
+          }
+
+
+          if(Leave_ends_date==""){
+
             $("#leave_ends_date").attr("style","border: 3px solid red");
             $("#errleave_ends_date").css("color","red");
             $("#errleave_ends_date").html("Please select leave end date");
             return false;
-        }
-        else{
+
+          }else{
+
             $("#leave_ends_date").attr("style","border:");
             $("#errleave_ends_date").html("");
-        }
-     if(Description==""){
+
+          }
+
+
+          if(Description==""){
+
             $("#description").attr("style","border: 3px solid red");
             $("#errdescription").css("color","red");
             $("#errdescription").html("Please enter your leave message");
             return false;
-        }else{
+
+          }else{
+
             $("#description").attr("style","border:");
             $("#errdescription").html("");
-        }
-      if(Support_document==""){
+
+          }
+
+
+          if(Support_document==""){
+
             $("#support_document").attr("style","border: 3px solid red");
             $("#errsupport_document").css("color","red");
             $("#errsupport_document").html("Please select your support document");
             return false;
-        }else{
+
+          }else{
+
             $("#support_document").attr("style","border:");
             $("#errsupport_document").html("");
-        }
-      if(Leave_status==""){
+
+          }
+
+
+          if(Leave_status==""){
+
             $("#leave_status").attr("style","border: 3px solid red");
             $("#errleave_status").css("color","red");
             $("#errleave_status").html("Please select leave status");
             return false;
-        }
-       else{
+
+          }else{
+
            $("#leave_status").attr("style","border:");
            $("#errleave_status").html("");
-       }
-     
-       
-    });
-    
-    function change(id,msg,type=null){
-        var get=$("#"+id).val();
-        
-        if(type==null){
-            if(get==""){
-            $("#"+id).attr("style","border: 3px solid red");
-            $("#"+msg).css("color","red");
-            $("#"+msg).html("This field must not be empty!");
+
+          }
+             
+        });
+          
+        function change(id,msg,type=null){
+
+          var get=$("#"+id).val();
             
-        }else{
-            $("#"+id).attr("style","border:");
-            $("#"+msg).html("");
+          if(type==null){
+
+            if(get==""){
+
+              $("#"+id).attr("style","border: 3px solid red");
+              $("#"+msg).css("color","red");
+              $("#"+msg).html("This field must not be empty!");
+                
+            }else{
+
+              $("#"+id).attr("style","border:");
+              $("#"+msg).html("");
+
+            }
+            
+          }
+            
         }
-        
-        }
-        
-       
-     
-    }
-    
-</script>
+          
+      </script>
+      <!--End scripting-->
       
+
+
       <!--  php insert code-->>
 
       <?php
 
-      if (isset($_POST['submit'])) {
-        $select_employee = $_POST['select_employee'];
-        $leave_type = $_POST['leave_type'];
-        $leave_start_date = $_POST['leave_start_date'];
-        $leave_ends_date = $_POST['leave_ends_date'];
-        $description = $_POST['description'];
-        $support_document = $_POST['support_document'];
-        $leave_status = $_POST['leave_status'];
+        if (isset($_POST['submit'])) {
 
-        $sql = "INSERT INTO leaves ( leave_type_id,employee_id,leave_start_date, leave_end_date, leave_for, supported_document, leave_status) VALUES ('$leave_type','$select_employee','$leave_start_date', '$leave_ends_date', '$description', '$support_document', '$leave_status')";
-        $query = mysqli_query($conn, $sql);
+          $select_employee = $_POST['select_employee'];
+          $leave_type = $_POST['leave_type'];
+          $leave_start_date = $_POST['leave_start_date'];
+          $leave_ends_date = $_POST['leave_ends_date'];
+          $description = $_POST['description'];
+          $support_document = $_POST['support_document'];
+          $leave_status = $_POST['leave_status'];
 
-        if ($query) {
-          echo 'Your leave document added successfully';
-          header("location:leaveManage.php");
-        } else {
-          echo 'Your leave document is not added';
+          $sql = "INSERT INTO leaves ( leave_type_id,employee_id,leave_start_date, leave_end_date, leave_for, supported_document, leave_status) VALUES ('$leave_type','$select_employee','$leave_start_date', '$leave_ends_date', '$description', '$support_document', '$leave_status')";
+          $query = mysqli_query($conn, $sql);
+
+          if ($query){
+
+            echo 'Your leave document added successfully';
+            header("location:leaveManage.php");
+
+          }else{
+
+            echo 'Your leave document is not added';
+          }
+
         }
-      }
-
-
 
       ?>
-
-
-
-
-
-
 
     </main>
     <!--end page main-->
@@ -321,6 +431,7 @@ if(!isset($_SESSION['userName'])){
 
   <!-- Bootstrap bundle JS -->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
+
   <!--plugins-->
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
@@ -334,13 +445,16 @@ if(!isset($_SESSION['userName'])){
   <script src="assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
   <script src="assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
   <script src="assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+
   <!--app-->
   <script src="assets/js/app.js"></script>
   <script src="assets/js/index.js"></script>
 
   <script>
+
     new PerfectScrollbar(".best-product")
     new PerfectScrollbar(".top-sellers-list")
+    
   </script>
 
 </body>
